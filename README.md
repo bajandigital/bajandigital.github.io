@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html>
-<body>Redirecting...</body>
-<head>
-<script>
-  var links = [
-    "https://www.bestchange.com/images/banners/100x100-12.gif",
-    "https://www.bestchange.com/images/banners/100x100-15.jpg",
-    "https://www.bestchange.com/images/banners/100x100-17.jpg"
-  ];
-  var randomLink = links[Math.floor(Math.random() * links.length)];
-  window.location.replace(randomLink);
-</script>
-</head>
+<h1>The **Bajan Digital** Hub.</h1>
 
-</html>
+A hub about all things <u>Bajan Digital</u>. 
 
+<i>Code</i> developed here will help to build our digital brand.
+
+We hope also to develop websites and other media through code and web programming and other coding with a heavy focus on simple automation.
