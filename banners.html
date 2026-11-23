@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 0;
+      display: block;
+      transition: opacity 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="ad-slot"></div>
+
+  <script>
+    var campaigns = {
+      bestchange: {
+        link: "https://www.bestchange.com/?p=605104",
+        top: [
+          "https://www.bestchange.com/images/banners/100x100-12.gif"
+        ],
+        side: [
+          "https://bestchange.com"
+        ]
+      }/*,
+      otherprogram: {
+        link: "https://your-other-affiliate-link.com",
+        top: [
+          "https://example.com"
+        ],
+        side: [
+          "https://example.com"
+        ]
+      }*/
+    };
+
+    var params = new URLSearchParams(window.location.search);
+    var programName = params.get("program") || "bestchange";
+    var slotName = params.get("slot") || "top";
+    var altName = params.get("alt") || programName;
+    var seconds = parseInt(params.get("speed"), 10);
+    if (isNaN(seconds)) seconds = 20; // Default: 20 seconds (set ?speed=0 to disable timer)
+
+    var selectedCampaign = campaigns[programName] || campaigns.bestchange;
+    var imageList = selectedCampaign[slotName] || selectedCampaign.top;
+    var currentIndex = Math.floor(Math.random() * imageList.length);
+    var isHovered = false;
+    var adSlot = document.getElementById("ad-slot");
+
+    function renderBanner() {
+      adSlot.innerHTML =
+        '<a href="' + selectedCampaign.link + '" target="_blank" rel="noopener">' +
+          '<img src="' + imageList[currentIndex] + '" alt="' + altName + '">' +
+        '</a>';
+    }
+
+    // Pause rotation if user hovers mouse over the banner to click it
+    adSlot.addEventListener("mouseenter", function() { isHovered = true; });
+    adSlot.addEventListener("mouseleave", function() { isHovered = false; });
+
+    // Initial random load
+    renderBanner();
+
+    // Rotate cleanly through remaining banners without repeating back-to-back
+    if (seconds > 0 && imageList.length > 1) {
+      setInterval(function() {
+        if (!isHovered) {
+          currentIndex = (currentIndex + 1) % imageList.length;
+          renderBanner();
+        }
+      }, seconds * 1000);
+    }
+  </script>
+</body>
+</html>
