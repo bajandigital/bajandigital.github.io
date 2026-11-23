@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<body>Redirecting...</body>
 <head>
 <script>
   var links = [
@@ -11,6 +12,6 @@
   window.location.replace(randomLink);
 </script>
 </head>
-<body>Redirecting...</body>
+
 </html>
 
