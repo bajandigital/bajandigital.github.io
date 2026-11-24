@@ -29,7 +29,8 @@
       bestchange: {
         link: "https://www.bestchange.com/?p=605104",
         top: [
-          "https://www.bestchange.com/images/banners/100x100-12.gif"
+          "https://www.bestchange.com/images/banners/100x100-12.gif",
+          "https://www.bestchange.com/images/banners/100x100-15.jpg"
         ],
         side: [
           "https://bestchange.com"
@@ -49,7 +50,8 @@
     var params = new URLSearchParams(window.location.search);
     var programName = params.get("program") || "bestchange";
     var slotName = params.get("slot") || "top";
-    var altName = params.get("alt") || programName;
+    var altName = params.get("alt") || "Online-money exchanger list";
+    var titleName = params.get("title") || "E-currency exchanger monitor BestChange";
     var seconds = parseInt(params.get("speed"), 10);
     if (isNaN(seconds)) seconds = 20; // Default: 20 seconds (set ?speed=0 to disable timer)
 
@@ -61,7 +63,7 @@
 
     function renderBanner() {
       adSlot.innerHTML =
-        '<a href="' + selectedCampaign.link + '" target="_blank" rel="noopener">' +
+        '<a href="' + selectedCampaign.link + '" title="' + titleName + '" target="_blank" rel="noopener">' +
           '<img src="' + imageList[currentIndex] + '" alt="' + altName + '">' +
         '</a>';
     }
