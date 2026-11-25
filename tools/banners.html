@@ -133,20 +133,25 @@
     }
 
    function sendHeight() {
-      var slotParam = new URLSearchParams(window.location.search).get("slot") || "top";
-      var height = document.getElementById("ad-slot").offsetHeight;
+      var slotBox = document.getElementById("ad-slot");
+      var height = slotBox ? slotBox.getBoundingClientRect().height : 0;
       if (height > 0) {
-        window.parent.postMessage({ bcSlot: slotParam, bcHeight: height }, "*");
+        window.parent.postMessage({ mySlot: slotName, myHeight: height }, "*");
       }
     }
 
-    // Send height as soon as the image finishes loading and whenever the window resizes
-    var bannerImg = document.querySelector("#ad-slot img");
-    if (bannerImg) {
-      bannerImg.onload = sendHeight;
-      if (bannerImg.complete) sendHeight();
-    }
-    window.addEventListener("resize", sendHeight);
+  if (window.ResizeObserver) {
+    new ResizeObserver(sendHeight).observe(document.getElementById("ad-slot"));
+  }
+
+  // Send height as soon as the image finishes loading and whenever the window resizes
+  var bannerImg = document.querySelector("#ad-slot img");
+  if (bannerImg) {
+    bannerImg.onload = sendHeight;
+    if (bannerImg.complete) sendHeight();
+  }
+  window.addEventListener("load", sendHeight);  
+  window.addEventListener("resize", sendHeight);
     
   </script>
 </body>
