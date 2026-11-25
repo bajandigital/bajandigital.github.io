@@ -27,7 +27,8 @@
   <script>
     var campaigns = {
       bestchange: {
-        link: "https://www.bestchange.com/?p=605104",
+        link: { top: "https://www.bestchange.com/?p=605104",
+                side: "https://www.bestchange.com/?p=605104" },
         top: [
           "https://www.bestchange.com/images/banners/100x100-12.gif",
           "https://www.bestchange.com/images/banners/100x100-15.jpg"
@@ -63,7 +64,7 @@
 
     function renderBanner() {
       adSlot.innerHTML =
-        '<a href="' + selectedCampaign.link + '" title="' + titleName + '" target="_blank" rel="noopener">' +
+        '<a href="' + selectedCampaign.link[slotName] + '" title="' + titleName + '" target="_blank" rel="noopener">' +
           '<img src="' + imageList[currentIndex] + '" alt="' + altName + '">' +
         '</a>';
     }
